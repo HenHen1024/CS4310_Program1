@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <iomanip>
 
+
+//job variable to hold all the info for the job
 struct Job {
     std::string name;
     int burst;
@@ -16,6 +18,7 @@ int main() {
     std::ifstream file("job.txt");
     std::vector<Job> jobs;
 
+    //Read jobs from the file
     Job job;
     while (file >> job.name >> job.burst) {
         jobs.push_back(job);
@@ -35,6 +38,7 @@ int main() {
     int time = 0;
     double total = 0;
 
+    // Print the scheduling order and calculate completion times
     std::cout << "--- SJF Scheduling ---\n";
 
     for (Job& j : jobs) {
@@ -48,6 +52,7 @@ int main() {
         total += j.completion;
     }
 
+    // Print the average turnaround time
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "Average Turnaround Time: "
               << total / jobs.size() << " ms\n";
