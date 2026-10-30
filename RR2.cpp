@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <iomanip>
 
+
+//job variable to hold all the info for the job
 struct Job {
     std::string name;
     int burst;
@@ -15,6 +17,7 @@ struct Job {
 };
 
 int main() {
+    //open the file and read in the jobs
     std::ifstream file("job.txt");
     std::vector<Job> jobs;
 
@@ -39,8 +42,9 @@ int main() {
 
     int time = 0;
 
-    std::cout << "--- Round Robin (RR-2) ---\n";
 
+    std::cout << "--- Round Robin (RR-2) ---\n";
+    //run the round robin algorithm
     while (!readyQueue.empty()) {
         int i = readyQueue.front();
         readyQueue.pop();
@@ -51,6 +55,7 @@ int main() {
         time += run;
         jobs[i].remaining -= run;
 
+        //print out the job name, start time, end time, and remaining time
         std::cout << jobs[i].name << ": "
                   << start << " - " << time << " ms";
 
@@ -69,6 +74,7 @@ int main() {
 
     double total = 0;
 
+    //print out the turnaround times and average turnaround time
     std::cout << "\nTurnaround Times:\n";
 
     for (const Job& j : jobs) {
