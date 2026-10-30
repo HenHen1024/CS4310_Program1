@@ -5,16 +5,20 @@
 #include <string>
 #include <iomanip>
 
+//job variable to hold all the info for the job
 struct Job {
     std::string name;
     int burst;
     int completion = 0;
 };
 
+// First Come First Serve Scheduling
 int main() {
+    // Open the job file and read the jobs into a vector
     std::ifstream file("job.txt");
     std::vector<Job> jobs;
 
+    // Read jobs from the file
     Job job;
     while (file >> job.name >> job.burst) {
         jobs.push_back(job);
@@ -28,8 +32,8 @@ int main() {
     int time = 0;
     double total = 0;
 
+    // Print the scheduling order and calculate completion times
     std::cout << "--- FCFS Scheduling ---\n";
-
     for (Job& j : jobs) {
         int start = time;
         time += j.burst;
